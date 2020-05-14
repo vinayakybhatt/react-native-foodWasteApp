@@ -11,49 +11,24 @@ const Ticket = (props) => {
     <View style={{ ...styles.items, ...props.style }}>
       <View style={styles.mainInfo}>
         <View style={styles.info}>
-          <Text style={styles.name}>{props.item.name}</Text>
-          <Text style={styles.owner}>{props.item.owner}</Text>
+          <Text style={styles.name}>{props.item.foodName}</Text>
+          <Text style={styles.owner}>{props.item.typeOfFood}</Text>
         </View>
         <View style={styles.details}>
-          <Text style={styles.time}>{props.item.time}</Text>
-          <Text style={styles.date}> {props.item.date} </Text>
+          <Text style={styles.time}>{props.item.quantity}</Text>
+          <Text style={styles.date}> {props.item.expiry} </Text>
         </View>
       </View>
       <View style={styles.location}>
         <Text style={{ ...styles.grid, ...styles.source }}>
-          {props.item.source}
+          {props.item.pickupLocation}
         </Text>
         <FontAwesome
           style={{ ...styles.grid, ...styles.arrowIcon }}
           name='long-arrow-right'
           size={24}
         />
-        <Text style={{ ...styles.grid, ...styles.destination }}>
-          {props.item.destination}
-        </Text>
       </View>
-      <View style={styles.amountWrapper}>
-        {props.qty ? (
-          <Text style={styles.amount}>{`€${
-            props.item.price * props.qty
-          }`}</Text>
-        ) : (
-          <Text style={styles.amount}>{`€${props.item.price}`}</Text>
-        )}
-      </View>
-      { /*<View style={styles.stations}>
-        <Text style={styles.midwayStation}>Stations:[</Text>
-        {props.item.midways.map((midway, index) => {
-          if (index < 2) {
-            return (
-              <Text style={styles.midway} key={midway}>
-                {midway},
-              </Text>
-            );
-          }
-        })}
-        <Text style={styles.midwayStation}>... ] </Text>
-      </View> */ }
     </View>
   );
 };
