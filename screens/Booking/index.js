@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import { fetchMyBookings } from "../../store/actions/details";
 import styles from "./styles";
 import Colors from "../../constants/colors";
@@ -60,6 +61,18 @@ const Home = (props) => {
             })}
         </ScrollView>
       )}
+      <View style={styles.fabButton}>
+        <TouchableOpacity
+            activeOpacity={0.8}
+            style={styles.fab}
+            onPress={() => {
+
+            }}
+        >
+          <Text style={styles.fabText}> BOOK TICKET </Text>
+          <FontAwesome name='plus' size={30} color={Colors.light} />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };

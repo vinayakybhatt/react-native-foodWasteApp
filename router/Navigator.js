@@ -141,7 +141,7 @@ const TabNavigatorScreen = () => (
       name='booking'
       component={BookingStackScreen}
       options={{
-        title: "My Bookings",
+        title: "Create Request",
       }}
     />
   </TabNavigator.Navigator>
@@ -165,9 +165,10 @@ const DrawerScreen = () => (
 
 export default () => {
   const auth = useSelector((state) => state.auth.token);
+  const testAuth = true;
   return (
     <NavigationContainer>
-      {auth ? <DrawerScreen /> : <AuthStackScreen />}
+      {testAuth ? <DrawerScreen /> : <AuthStackScreen />}
     </NavigationContainer>
   );
 };

@@ -1,12 +1,12 @@
 import { AsyncStorage } from 'react-native'
-import { TRAINS, BOOKING } from "../../env";
+import { ALLREQUESTS, BOOKING } from "../../env";
 
 export const SET_DETAILS = "SET_DETAILS";
 export const SET_BOOKINGS = "SET_BOOKINGS";
 
 export const fetchDetails = () => {
   return async (dispatch) => {
-    const response = await fetch(TRAINS);
+    const response = await fetch(ALLREQUESTS);
     const resData = await response.json();
     const data = Object.entries(resData);
 

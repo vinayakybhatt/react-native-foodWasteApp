@@ -2,21 +2,18 @@ const axios = require("axios");
 const { v4 } = require("uuid");
 const data = {
   id: v4(),
-  name: "Birmingham Pullman",
-  owner: "BR",
-  source: "Birmingham",
-  destination: "Liverpool",
-  price: "150",
-  date: new Date().toDateString(),
-  time: new Date().toLocaleTimeString(),
-  midways: ['Birmingham', 'Sunderland', 'Plymouth', 'Newquay', 'Liverpool']
+  foodName: "apple",
+  typeOfFood: "lunch",
+  quantity: '7',
+  expiry: new Date().toDateString(),
+  pickupLocation: "83, kanak vihar",
 };
 
 const generator = async (details) => {
     try {
-        const { data } = await axios.post("https://train-booking-tfd.firebaseio.com/trains.json", details)
+        const { data } = await axios.post("https://reactnative-foodwasteapp.firebaseio.com/allRequests.json", details)
         console.log(data)
-    } catch (e) {
+    } catch (e) {   
         console.log (`e -> ${e.message}`)
     }
 }
