@@ -32,6 +32,7 @@ const Home = (props) => {
     };
     loadDetails();
   }, [dispatch]);
+  const { email, localId } = useSelector((state) => state.auth.user);
 
   const details = useSelector((state) => state.details.allDetails);
   const renderInfo = (id, name) => {
@@ -48,7 +49,13 @@ const Home = (props) => {
       </View>
     );
   }
-
+    const filterData =()=>{
+        return(details.filter(e=>{
+            return(e.userId!==localId)
+        }));
+    };
+    let filteredData = filterData();
+    console.log({filteredData})
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.screen}>
@@ -67,7 +74,7 @@ const Home = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
-        {details.map((item) => (
+        {filteredData.map((item) => (
           <TouchableOpacity
             key={item.id}
             activeOpacity={0.8}

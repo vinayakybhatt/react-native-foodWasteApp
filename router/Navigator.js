@@ -168,7 +168,7 @@ export default () => {
   const testAuth = true;
   return (
     <NavigationContainer>
-      {testAuth ? <DrawerScreen /> : <AuthStackScreen />}
+      {auth ? <DrawerScreen /> : <AuthStackScreen />}
     </NavigationContainer>
   );
 };

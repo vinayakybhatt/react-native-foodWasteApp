@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { fetchMyBookings } from "../../store/actions/details";
+import { fetchMyBookings, fetchDetails } from "../../store/actions/details";
 import styles from "./styles";
 import Colors from "../../constants/colors";
 import Card from "../../components/UI/Card";
@@ -20,11 +20,14 @@ const Home = (props) => {
   const [isLoading, setisLoading] = useState(false);
   const dispatch = useDispatch();
   const bookings = useSelector((state) => state.details.bookings);
-  useEffect(() => {
+  const allDetails = useSelector((state) => state.details.allDetails);
+    const { email, localId } = useSelector((state) => state.auth.user);
+    useEffect(() => {
     const loadBookings = async () => {
       try {
         setisLoading(true);
-        await dispatch(fetchMyBookings());
+        // await dispatch(fetchMyBookings());
+        await dispatch(fetchDetails());
         setisLoading(false);
       } catch (e) {
         setisLoading(false);
@@ -32,6 +35,14 @@ const Home = (props) => {
     };
     loadBookings();
   }, [dispatch]);
+    allDetails?console.log({allDetails}):null;
+    const filterData =()=>{
+      return(allDetails.filter(e=>{
+          return(e.userId===localId)
+      }));
+    };
+    let filteredData = filterData();
+    console.log({filteredData})
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {isLoading ? (
@@ -40,8 +51,8 @@ const Home = (props) => {
         </View>
       ) : (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          {bookings &&
-            bookings.map((booking, index) => {
+          {filteredData &&
+          filteredData.map((booking, index) => {
               return (
                 <TouchableOpacity
                   activeOpacity={0.7}
@@ -55,7 +66,7 @@ const Home = (props) => {
                     });
                   }}
                 >
-                  <Ticket item={booking.train} qty={booking.user.qty} />
+                  <Ticket item={booking} />
                 </TouchableOpacity>
               );
             })}
