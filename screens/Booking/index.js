@@ -42,7 +42,7 @@ const Home = (props) => {
       }));
     };
     let filteredData = filterData();
-    console.log({filteredData})
+    console.log({filteredData});
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {isLoading ? (
@@ -70,20 +70,21 @@ const Home = (props) => {
                 </TouchableOpacity>
               );
             })}
+          <View style={styles.fabButton}>
+            <TouchableOpacity
+                activeOpacity={0.8}
+                style={styles.fab}
+                onPress={() => {
+                    props.navigation.navigate("createRequest")
+                }}
+            >
+              <Text style={styles.fabText}> Request </Text>
+              <FontAwesome name='plus' size={30} color={Colors.light} />
+            </TouchableOpacity>
+          </View>
+
         </ScrollView>
       )}
-      <View style={styles.fabButton}>
-        <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.fab}
-            onPress={() => {
-
-            }}
-        >
-          <Text style={styles.fabText}> BOOK TICKET </Text>
-          <FontAwesome name='plus' size={30} color={Colors.light} />
-        </TouchableOpacity>
-      </View>
     </SafeAreaView>
   );
 };

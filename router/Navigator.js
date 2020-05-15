@@ -18,6 +18,7 @@ import Info from "../screens/Info";
 import SearchBar from "../screens/SearchScreen";
 import Booking from "../screens/Booking";
 import BookingForm from "../screens/BookingForm";
+import CreateRequest from "../screens/CreateRequest";
 import BookingInfo from "../screens/BookingInfo";
 
 const AuthStack = createStackNavigator();
@@ -73,6 +74,13 @@ const HomeStackScreen = () => (
       component={BookingForm}
       options={({ route }) => {
         return { headerTitle: 'Apply for Ticket' }
+      }}
+    />
+    <HomeStack.Screen
+      name="createRequest"
+      component={CreateRequest}
+      options={({ route }) => {
+        return { headerTitle: 'Create a Request' }
       }}
     />
   </HomeStack.Navigator>
