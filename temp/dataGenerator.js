@@ -1,24 +1,25 @@
 const axios = require("axios");
 const { v4 } = require("uuid");
-const data = {
-  id: v4(),
-  foodName: "apple",
-  typeOfFood: "lunch",
-  quantity: '7',
-  expiry: new Date().toDateString(),
-  pickupLocation: "83, kanak vihar",
-};
+// const data = {
+//   id: v4(),
+//   foodName: "apple",
+//   typeOfFood: "lunch",
+//   quantity: '7',
+//   expiry: new Date().toDateString(),
+//   userId: '',
+//   pickupLocation: "83, kanak vihar",
+// };
 
 const generator = async (details) => {
     try {
-        const { data } = await axios.post("https://reactnative-foodwasteapp.firebaseio.com/allRequests.json", details)
+        const { data } = await axios.post("https://reactnative-foodwasteapp.firebaseio.com/allRequests.json", details);
         console.log(data)
     } catch (e) {   
         console.log (`e -> ${e.message}`)
     }
-}
+};
 
-generator(data)
+generator(data);
 
 // const getDetails = async () => {
 //     try {
