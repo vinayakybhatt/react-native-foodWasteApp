@@ -35,14 +35,12 @@ const Home = (props) => {
     };
     loadBookings();
   }, [dispatch]);
-    allDetails?console.log({allDetails}):null;
     const filterData =()=>{
       return(allDetails.filter(e=>{
           return(e.userId===localId)
       }));
     };
     let filteredData = filterData();
-    console.log({filteredData});
   return (
     <SafeAreaView style={{ flex: 1 }}>
       {isLoading ? (

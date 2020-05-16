@@ -33,7 +33,7 @@ const AuthStackScreen = () => (
     <AuthStack.Screen
       name='login'
       component={Login}
-      options={{ title: "Online Train Ticket Booking" }}
+      options={{ title: "Food Waste Portal" }}
     />
   </AuthStack.Navigator>
 );
@@ -66,7 +66,7 @@ const HomeStackScreen = () => (
       name='searchBar'
       component={SearchBar}
       options={({ route }) => {
-        return { headerTitle: "Search Trains" }
+        return { headerTitle: "Search Food Requests" }
       }}
     />
     <HomeStack.Screen 
@@ -93,7 +93,7 @@ const BookingStackScreen = () => (
     headerRight: () => ( <DrawerBarIcon route={route}/>),
   })}>
     <BookingStack.Screen name='booking' component={Booking} options={{
-      title: "My Booking"
+      title: "My Requests"
     }}/>
     <BookingStack.Screen name='bookingInfo' component={BookingInfo} options={({ route }) => {
       return { headerTitle: route.params.name }

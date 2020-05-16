@@ -34,11 +34,7 @@ const Info = (props) => {
     viewShotRef.current.capture().then(uri => {
       const imgName = uri.split('/').pop()
       const newPath = FileSystem.documentDirectory + imgName
-      console.log({
-        imgName,
-        uri,
-        newPath
-      })
+
       FileSystem.moveAsync({
         from: uri,
         to: newPath

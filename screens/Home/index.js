@@ -55,7 +55,6 @@ const Home = (props) => {
         }));
     };
     let filteredData = filterData();
-    console.log({filteredData})
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.screen}>

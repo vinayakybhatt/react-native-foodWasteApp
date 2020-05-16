@@ -6,28 +6,31 @@ import {
     ScrollView,
     TouchableOpacity,
     Alert,
+    Platform,
+    Button
 } from "react-native";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { FontAwesome } from "@expo/vector-icons";
 import Colors from "../../constants/colors";
 import styles from "./styles";
 import Input from "../../components/UI/Input";
 import Card from "../../components/UI/Card";
 import Ticket from "../../components/UI/Ticket";
-import { BOOKING } from "../../env";
-import { fetchMyBookings } from "../../store/actions/details";
+import { ALLREQUESTS } from "../../env";
+import { fetchDetails } from "../../store/actions/details";
 import { useSelector, useDispatch } from "react-redux";
 const formReducer = (state, { key, payload }) => {
     switch (key) {
-        case "NAME":
-            return { ...state, name: payload };
-        case "AGE":
-            return { ...state, age: payload };
-        case "ID":
-            return { ...state, id: payload };
-        case "GENDER":
-            return { ...state, gender: payload };
-        case "QTY":
-            return { ...state, qty: payload };
+        case "foodName":
+            return { ...state, foodName: payload };
+        case "typeOfFood":
+            return { ...state, typeOfFood: payload };
+        case "expiry":
+            return { ...state, expiry: payload };
+        case "quantity":
+            return { ...state, quantity: payload };
+        case "pickupLocation":
+            return { ...state, pickupLocation: payload };
         default:
             return state;
     }
@@ -36,15 +39,42 @@ const formReducer = (state, { key, payload }) => {
 const CreateBooking = (props) => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
     const [formState, formDispatch] = useReducer(formReducer, {
-        name: "",
-        age: null,
-        id: "",
-        gender: "",
-        localId: user.localId,
-        qty: 1,
+        foodName: "",
+        typeOfFood: '',
+        quantity: "",
+        expiry: '',
+        userId: user.localId,
+        pickupLocation: "",
     });
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+        formState.expiry = currentDate;
+    };
 
+    const showMode = currentMode => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    // const data = {
+//   id: v4(),
+//   foodName: "apple",
+//   typeOfFood: "lunch",
+//   quantity: '7',
+//   expiry: new Date().toDateString(),
+//   userId: '',
+//   pickupLocation: "83, kanak vihar",
+// };
     const inputHandler = ({ key, payload }) => {
         formDispatch({
             key,
@@ -57,17 +87,18 @@ const CreateBooking = (props) => {
     };
 
     const bookingHandler = async () => {
+        console.log({formState})
         if (
-            formState.name &&
-            formState.age &&
-            formState.id &&
-            formState.gender &&
-            formState.qty
+            formState.foodName &&
+            formState.quantity &&
+            formState.expiry &&
+            formState.pickupLocation
         ) {
+            formState.expiry = formState.expiry.toDateString()
             const dataObj = {
-                user: { ...formState },
+                ...formState,
             };
-            const response = await fetch(BOOKING, {
+            const response = await fetch(ALLREQUESTS, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -75,10 +106,10 @@ const CreateBooking = (props) => {
                 body: JSON.stringify(dataObj),
             });
             const res = await response.json();
-            await dispatch(fetchMyBookings());
+            await dispatch(fetchDetails());
             Alert.alert(
-                "Ticket Booked!",
-                "Tickets has been booked",
+                "Request Created!",
+                "Request have been created successfully",
                 [
                     {
                         text: "OK",
@@ -100,44 +131,51 @@ const CreateBooking = (props) => {
                         <View style={styles.form}>
                             <Input
                                 style={styles.input}
-                                placeholder={"Full name"}
+                                placeholder={"Food name"}
                                 onChangeText={(payload) =>
-                                    inputHandler({ key: "NAME", payload })
+                                    inputHandler({ key: "foodName", payload })
                                 }
-                                value={formState.name}
                                 returnKeyType='next'
                             />
                             <Input
                                 style={styles.input}
-                                placeholder={"Age"}
-                                keyboardType={"number-pad"}
-                                maxLength={2}
+                                placeholder={"Food Type"}
                                 onChangeText={(payload) =>
-                                    inputHandler({ key: "AGE", payload })
+                                    inputHandler({ key: "typeOfFood", payload })
+                                }
+                                returnKeyType='next'
+                            />
+                            <Input
+                                style={styles.input}
+                                placeholder={"Quantity"}
+                                keyboardType={"number-pad"}
+                                onChangeText={(payload) =>
+                                    inputHandler({ key: "quantity", payload })
                                 }
                             />
+                            <View>
+                                <View>
+                                    <Button onPress={showDatepicker} title="Show date picker!" />
+                                </View>
+                                {show && (
+                                    <DateTimePicker
+                                        testID="dateTimePicker"
+                                        timeZoneOffsetInMinutes={0}
+                                        mode={mode}
+                                        is24Hour={true}
+                                        value={date}
+                                        display="default"
+                                        onChange={onChange}
+                                    />
+                                )}
+                            </View>
                             <Input
                                 style={styles.input}
-                                placeholder={"Govt. Issued ID Proof"}
+                                placeholder={"Pickup Location"}
                                 onChangeText={(payload) => {
-                                    inputHandler({ key: "ID", payload });
+                                    inputHandler({ key: "pickupLocation", payload });
                                 }}
-                            />
-                            <Input
-                                style={styles.input}
-                                placeholder={"Gender"}
-                                onChangeText={(payload) => {
-                                    inputHandler({ key: "GENDER", payload });
-                                }}
-                            />
-                            <Input
-                                style={styles.input}
-                                placeholder={"Ticket quantity"}
-                                keyboardType={"number-pad"}
-                                maxLength={2}
-                                onChangeText={(payload) => {
-                                    inputHandler({ key: "QTY", payload });
-                                }}
+
                             />
                         </View>
                     </View>
@@ -149,7 +187,7 @@ const CreateBooking = (props) => {
                                 bookingHandler();
                             }}
                         >
-                            <Text style={styles.fabText}> Confirm Ticket </Text>
+                            <Text style={styles.fabText}> Confirm Request </Text>
                         </TouchableOpacity>
                     </View>
                 </View>
