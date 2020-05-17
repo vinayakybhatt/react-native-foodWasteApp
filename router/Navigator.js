@@ -73,7 +73,7 @@ const HomeStackScreen = () => (
       name="bookingForm"
       component={BookingForm}
       options={({ route }) => {
-        return { headerTitle: 'Apply for Ticket' }
+        return { headerTitle: 'Apply for Pickup' }
       }}
     />
     <HomeStack.Screen
