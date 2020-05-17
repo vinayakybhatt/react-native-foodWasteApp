@@ -20,7 +20,7 @@ const images = [
 ];
 const Info = (props) => {
   const details = useSelector((state) => state.details.allDetails);
-  const { id } = props.route.params;
+  const { id, from } = props.route.params;
   const selectedItem = details.find((item) => item.id === id);
   const random = Math.floor((Math.random() * images.length - 1) + 1);
   return (
@@ -54,7 +54,7 @@ const Info = (props) => {
               <Text style={styles.timings}> Expiry </Text>
               <Text style={styles.time}> { selectedItem.expiry } </Text>
             </View>
-            <View style={styles.fabButton}>
+              {from!=='booking'? <View style={styles.fabButton}>
               <TouchableOpacity
                 activeOpacity={0.8}
                 style={styles.fab}
@@ -64,10 +64,10 @@ const Info = (props) => {
                   });
                 }}
               >
-                <Text style={styles.fabText}> BOOK TICKET </Text>
+                <Text style={styles.fabText}> Pick Up </Text>
                 <FontAwesome name='plus' size={30} color={Colors.light} />
               </TouchableOpacity>
-            </View>
+            </View>: null}
           </View>
         </View>
       </ScrollView>

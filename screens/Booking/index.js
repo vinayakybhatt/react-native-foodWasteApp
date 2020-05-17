@@ -35,6 +35,13 @@ const Home = (props) => {
     };
     loadBookings();
   }, [dispatch]);
+    const renderInfo = (id, name,from) => {
+        props.navigation.navigate("info", {
+            id,
+            name,
+            from
+        });
+    };
     const filterData =()=>{
       return(allDetails.filter(e=>{
           return(e.userId===localId)
@@ -55,15 +62,7 @@ const Home = (props) => {
                 <TouchableOpacity
                   activeOpacity={0.7}
                   key={index}
-                  onPress={() => {
-                    props.navigation.navigate("bookingInfo", {
-                      item: booking.user,
-                      id: booking.train.id,
-                      name: booking.train.name,
-                      email: booking.email,
-                    });
-                  }}
-                >
+                  onPress={() => renderInfo(booking.id, booking.foodName,'booking')}>
                   <Ticket item={booking} />
                 </TouchableOpacity>
               );

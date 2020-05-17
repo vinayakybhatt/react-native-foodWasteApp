@@ -25,8 +25,6 @@ const images = [
 ];
 const Info = (props) => {
   const details = useSelector((state) => state.details.allDetails);
-  const { id, item, email } = props.route.params;
-
   const selectedItem = details.find((item) => item.id === id);
   const random = Math.floor(Math.random() * images.length - 1 + 1);
   const viewShotRef = useRef()
@@ -55,60 +53,31 @@ const Info = (props) => {
           <View style={styles.itemView}>
             <View style={styles.mainInfo}>
               <Text style={styles.owner}>
-                {selectedItem.owner.toUpperCase()}
+                {selectedItem.foodName.toUpperCase()}
               </Text>
-              <Text style={styles.name}> {selectedItem.name} </Text>
+              <Text style={styles.name}> {selectedItem.typeOfFood} </Text>
             </View>
             <View style={styles.location}>
               <Text style={styles.source}>
-                {selectedItem.source.toUpperCase()}
+                {selectedItem.pickupLocation.toUpperCase()}
               </Text>
               <Text style={styles.arrow}>
                 <FontAwesome name='long-arrow-right' size={36} />
               </Text>
               <Text style={styles.destination}>
-                {selectedItem.destination.toUpperCase()}
+                {selectedItem.quantity.toUpperCase()}
               </Text>
             </View>
             <View style={styles.priceWrapper}>
               <Text style={styles.price}>
-                {`€${selectedItem.price * item.qty}`}
+                {`${selectedItem.pickupLocation}`}
               </Text>
             </View>
 
             <View style={styles.incomingDetails}>
               <Text style={styles.timings}> Timings </Text>
-              <Text style={styles.time}> {selectedItem.time} </Text>
-              <Text style={styles.date}> {selectedItem.date} </Text>
+              <Text style={styles.time}> {selectedItem.expiry} </Text>
             </View>
-            <View style={styles.incomingDetails}>
-              <Text style={styles.timings}> User Details </Text>
-              <View style={styles.basicInfo}>
-                <Text style={styles.basicInfoName}> {item.name} </Text>
-                <Text style={styles.basicInfoEmail}> {email} </Text>
-              </View>
-              <View>
-                <Text> Seats: {item.qty} </Text>
-              </View>
-              <View>
-                <Text> Govt Verified ID: {item.id} </Text>
-              </View>
-            </View>
-            <Text style={styles.stationsGoTrough}>
-              Stations {selectedItem.name} go trough...
-            </Text>
-            <View style={styles.information}>
-              {selectedItem.midways.map((midway) => (
-                <TouchableOpacity activeOpacity={0.8} key={midway}>
-                  <Text style={styles.infoText}>{midway}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-            <TouchableOpacity onPress={saveScreenshot}>
-              <View style={styles.screenshotBtn}>
-                <Text style={styles.screenshotText}> Capture Screenshot </Text>
-              </View>
-            </TouchableOpacity>
           </View>
         </ViewShot>
       </ScrollView>

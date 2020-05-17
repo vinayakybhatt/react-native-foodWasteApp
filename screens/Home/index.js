@@ -55,6 +55,7 @@ const Home = (props) => {
         }));
     };
     let filteredData = filterData();
+    console.log({filteredData})
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.screen}>
@@ -73,12 +74,12 @@ const Home = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }}>
-        {filteredData.map((item) => (
+        {filteredData.map((item,index) => (
           <TouchableOpacity
-            key={item.id}
+            key={index}
             activeOpacity={0.8}
             style={styles.touchable}
-            onPress={() => renderInfo(item.id, item.name)}
+            onPress={() => renderInfo(item.id, item.foodName)}
           >
             <Ticket item={item} />
           </TouchableOpacity>

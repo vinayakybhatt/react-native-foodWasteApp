@@ -54,7 +54,7 @@ const CreateBooking = (props) => {
         const currentDate = selectedDate || date;
         setShow(Platform.OS === 'ios');
         setDate(currentDate);
-        formState.expiry = currentDate;
+        formState.expiry = currentDate.toDateString();
     };
 
     const showMode = currentMode => {
@@ -94,7 +94,6 @@ const CreateBooking = (props) => {
             formState.expiry &&
             formState.pickupLocation
         ) {
-            formState.expiry = formState.expiry.toDateString()
             const dataObj = {
                 ...formState,
             };

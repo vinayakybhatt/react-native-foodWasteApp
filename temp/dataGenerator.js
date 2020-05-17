@@ -8,6 +8,7 @@ const { v4 } = require("uuid");
 //   expiry: new Date().toDateString(),
 //   userId: '',
 //   pickupLocation: "83, kanak vihar",
+//   status: 'pending' //pickedup, pending, expired
 // };
 
 const generator = async (details) => {
