@@ -87,7 +87,6 @@ const CreateBooking = (props) => {
     };
 
     const bookingHandler = async () => {
-        console.log({formState})
         if (
             formState.foodName &&
             formState.quantity &&

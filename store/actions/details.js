@@ -3,6 +3,7 @@ import { ALLREQUESTS, BOOKING } from "../../env";
 
 export const SET_DETAILS = "SET_DETAILS";
 export const SET_BOOKINGS = "SET_BOOKINGS";
+export const COMPLETE_DETAILS = "COMPLETE_DETAILS";
 
 export const fetchDetails = () => {
   return async (dispatch) => {
@@ -16,6 +17,18 @@ export const fetchDetails = () => {
     dispatch({
       type: SET_DETAILS,
       details,
+    });
+  };
+};
+export const fetchCompleteDetails = () => {
+  return async (dispatch) => {
+    const response = await fetch(ALLREQUESTS);
+    const resData = await response.json();
+    console.log(resData,'response');
+
+    dispatch({
+      type: COMPLETE_DETAILS,
+        resData,
     });
   };
 };
