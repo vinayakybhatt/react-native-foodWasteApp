@@ -35,10 +35,12 @@ const Home = (props) => {
   const { email, localId } = useSelector((state) => state.auth.user);
 
   const details = useSelector((state) => state.details.allDetails);
-  const renderInfo = (id, name) => {
-    props.navigation.navigate("info", {
-      id,
+  const renderInfo = (item, name,from) => {
+      from = 'home';
+      props.navigation.navigate("info", {
+      item,
       name,
+      from
     });
   };
 
@@ -51,11 +53,10 @@ const Home = (props) => {
   }
     const filterData =()=>{
         return(details.filter(e=>{
-            return(e.userId!==localId)
+            return(e.userId!==localId && e.status!=='pickedup')
         }));
     };
     let filteredData = filterData();
-    console.log({filteredData})
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.screen}>
@@ -79,7 +80,7 @@ const Home = (props) => {
             key={index}
             activeOpacity={0.8}
             style={styles.touchable}
-            onPress={() => renderInfo(item.id, item.foodName)}
+            onPress={() => renderInfo(item, item.foodName)}
           >
             <Ticket item={item} />
           </TouchableOpacity>

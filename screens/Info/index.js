@@ -20,8 +20,13 @@ const images = [
 ];
 const Info = (props) => {
   const details = useSelector((state) => state.details.allDetails);
-  const { id, from } = props.route.params;
-  const selectedItem = details.find((item) => item.id === id);
+  const { item, from } = props.route.params;
+  let selectedItem = {};
+  details.forEach(e=>{
+    if(e.foodName === item.foodName && e.foodName===item['foodName'] && e.quantity===item['quantity']&& e.pickupLocation ===item['pickupLocation']){
+      selectedItem = e;
+    }
+  })
   const random = Math.floor((Math.random() * images.length - 1) + 1);
   return (
     <SafeAreaView>

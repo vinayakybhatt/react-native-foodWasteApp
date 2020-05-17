@@ -35,9 +35,9 @@ const Home = (props) => {
     };
     loadBookings();
   }, [dispatch]);
-    const renderInfo = (id, name,from) => {
+    const renderInfo = (item, name,from) => {
         props.navigation.navigate("info", {
-            id,
+            item,
             name,
             from
         });
@@ -62,7 +62,7 @@ const Home = (props) => {
                 <TouchableOpacity
                   activeOpacity={0.7}
                   key={index}
-                  onPress={() => renderInfo(booking.id, booking.foodName,'booking')}>
+                  onPress={() => renderInfo(booking, booking.foodName,'booking')}>
                   <Ticket item={booking} />
                 </TouchableOpacity>
               );
