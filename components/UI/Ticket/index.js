@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     borderRadius: 5,
     borderLeftColor: Colors.primary,
-    borderRightColor: Colors.danger,
+    borderRightColor: Colors.primary,
     borderLeftWidth: 5,
     borderRightWidth: 5,
   },
