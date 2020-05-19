@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  TouchableHighlight
+
 } from "react-native";
 import { useSelector } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
@@ -26,7 +26,7 @@ const Info = (props) => {
     if(e.foodName === item.foodName && e.foodName===item['foodName'] && e.quantity===item['quantity']&& e.pickupLocation ===item['pickupLocation']){
       selectedItem = e;
     }
-  })
+  });
   const random = Math.floor((Math.random() * images.length - 1) + 1);
   return (
     <SafeAreaView>
@@ -45,7 +45,7 @@ const Info = (props) => {
             </View>
             <View style={styles.location}>
               <Text style={styles.source}>
-                {selectedItem.pickupLocation.toUpperCase()}
+                {selectedItem.pickupLocation}
               </Text>
               <Text style={styles.arrow}>
                 <FontAwesome name='long-arrow-right' size={36} />

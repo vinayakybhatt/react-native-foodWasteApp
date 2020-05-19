@@ -1,49 +1,26 @@
 import React, { useRef } from "react";
-import * as FileSystem from 'expo-file-system';
 import {
   View,
   Text,
   ScrollView,
   SafeAreaView,
   Image,
-  TouchableOpacity,
-  TouchableHighlight,
-  Platform,
-  TouchableNativeFeedback,
-  Alert
 } from "react-native";
 import { useSelector } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
 import ViewShot from "react-native-view-shot";
 import styles from "./styles";
-import Colors from "../../constants/colors";
 const images = [
   require("../../assets/images/0.jpg"),
   require("../../assets/images/1.jpg"),
   require("../../assets/images/2.jpg"),
   require("../../assets/images/3.jpg"),
 ];
-const Info = (props) => {
+const Info = () => {
   const details = useSelector((state) => state.details.allDetails);
   const selectedItem = details.find((item) => item.id === id);
   const random = Math.floor(Math.random() * images.length - 1 + 1);
-  const viewShotRef = useRef()
-  const saveScreenshot = async () => {
-    viewShotRef.current.capture().then(uri => {
-      const imgName = uri.split('/').pop()
-      const newPath = FileSystem.documentDirectory + imgName
-
-      FileSystem.moveAsync({
-        from: uri,
-        to: newPath
-      }).then(() => {
-        Alert.alert("Screenshot Saved", `Location: ${newPath}`, [{ text: "OK", onPress: () => { console.log(newPath)} }], { cancelable: false });
-      })
-    }).catch(e => {
-      Alert.alert("Error", "Something went wrong, Please try again.", [{ text: "OK" }], { cancelable: false });
-      throw e;
-    });
-  };
+  const viewShotRef = useRef();
 
   return (
     <SafeAreaView>
