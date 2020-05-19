@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StyleSheet,
-  Dimensions,
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
@@ -13,47 +12,38 @@ import Ticket from "../../components/UI/Ticket";
 import Card from "../../components/UI/Card";
 import Colors from "../../constants/colors";
 const SearchScreen = (props) => {
-  const [source, destination] = props.route.params.search.split("-");
+  const search = props.route.params.search.toLowerCase();
   const res = useSelector((state) => state.details.allDetails);
 
   const filterData = () => {
-    const s = source && source.toLowerCase();
-    const d = destination && destination.toLowerCase();
+      return (res.filter((food) => {
+      const hasFoodName = food.foodName.toLowerCase().includes(search);
+      const hasTypeOfFood = food.typeOfFood.toLowerCase().includes(search);
 
-    const filteredData = res.filter((train) => {
-      const hasSource = train.source.toLowerCase().includes(s);
-      const hasDestination = train.destination.toLowerCase().includes(d);
-      const midways = train.midways.map((midway) => midway.toLowerCase());
-
-      let hasMidway;
-      if (midways.includes(s) || midways.includes(d)) hasMidway = true;
-      else hasMidway = false;
-
-      if (hasSource || hasDestination || hasMidway) return true;
-      else return false;
-    });
-    return filteredData;
+      return (hasFoodName || hasTypeOfFood);
+    }));
   };
   const filter = filterData();
-
+  const renderInfo = (item, name,from) => {
+      props.navigation.navigate("info", {
+          item,
+          name,
+          from
+      });
+  };
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View>
           {filter.length > 0 ? (
-            filter.map((train) => (
+            filter.map((item,index) => (
               <TouchableOpacity
                 activeOpacity={0.6}
-                key={train.id}
+                key={index}
                 style={styles.ticket}
-                onPress={() => {
-                  props.navigation.navigate("info", {
-                    id: train.id,
-                    name: train.name,
-                  });
-                }}
+                onPress={() => renderInfo(item, item.foodName)}
               >
-                <Ticket item={train} />
+                <Ticket item={item} />
               </TouchableOpacity>
             ))
           ) : (
