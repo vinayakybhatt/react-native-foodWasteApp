@@ -5,23 +5,19 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  FlatList,
   ScrollView,
   ActivityIndicator,
 } from "react-native";
-import { Entypo } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-import { fetchMyBookings, fetchDetails } from "../../store/actions/details";
+import {  fetchDetails } from "../../store/actions/details";
 import styles from "./styles";
 import Colors from "../../constants/colors";
-import Card from "../../components/UI/Card";
 import Ticket from "../../components/UI/Ticket";
 const Home = (props) => {
   const [isLoading, setisLoading] = useState(false);
   const dispatch = useDispatch();
-  const bookings = useSelector((state) => state.details.bookings);
   const allDetails = useSelector((state) => state.details.allDetails);
-    const { email, localId } = useSelector((state) => state.auth.user);
+    const {localId} = useSelector((state) => state.auth.user);
     useEffect(() => {
     const loadBookings = async () => {
       try {
