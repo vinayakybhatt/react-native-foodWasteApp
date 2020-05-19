@@ -7,11 +7,8 @@ import {
     TouchableOpacity,
     Alert,
 } from "react-native";
-import {FontAwesome} from "@expo/vector-icons";
-import Colors from "../../constants/colors";
 import styles from "./styles";
 import Input from "../../components/UI/Input";
-import Card from "../../components/UI/Card";
 import Ticket from "../../components/UI/Ticket";
 import {BOOKING} from "../../env";
 import {fetchMyBookings, fetchCompleteDetails} from "../../store/actions/details";
@@ -64,7 +61,8 @@ const BookingForm = (props) => {
     const mapItemToFood = () => {
         for(let key in completeDetails)
         {
-            if(completeDetails[key].foodName===item['foodName'] && completeDetails[key].quantity===item['quantity']&& completeDetails[key].pickupLocation ===item['pickupLocation'] ){
+
+            if(completeDetails.hasOwnProperty(key)&&completeDetails[key].foodName===item['foodName'] && completeDetails[key].quantity===item['quantity']&& completeDetails[key].pickupLocation ===item['pickupLocation'] ){
                fetchHandler(key);
             }
         }
