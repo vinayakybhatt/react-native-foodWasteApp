@@ -17,10 +17,9 @@ const SearchScreen = (props) => {
 
   const filterData = () => {
       return (res.filter((food) => {
-      const hasFoodName = food.foodName.toLowerCase().includes(search);
-      const hasTypeOfFood = food.typeOfFood.toLowerCase().includes(search);
-
-      return (hasFoodName || hasTypeOfFood);
+          const hasFoodName = food.foodName.toLowerCase().includes(search);
+          const hasTypeOfFood = food.typeOfFood.toLowerCase().includes(search);
+          return (hasFoodName || hasTypeOfFood);
     }));
   };
   const filter = filterData();
@@ -41,7 +40,7 @@ const SearchScreen = (props) => {
                 activeOpacity={0.6}
                 key={index}
                 style={styles.ticket}
-                onPress={() => renderInfo(item, item.foodName)}
+                onPress={() => renderInfo(item, item.foodName,'search')}
               >
                 <Ticket item={item} />
               </TouchableOpacity>
