@@ -6,7 +6,6 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-
 } from "react-native";
 import { useSelector } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";

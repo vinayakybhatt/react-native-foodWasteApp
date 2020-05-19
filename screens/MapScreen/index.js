@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 const MapScreen = (props) => {
   const { location } = props.route.params;
@@ -38,7 +38,7 @@ const MapScreen = (props) => {
       onLongPress={selectLocationHandler}
     >
       {markerCoordinates && (
-        <Marker title='picked location' coordinate={markerCoordinates}></Marker>
+        <Marker title='picked location' coordinate={markerCoordinates} />
       )}
     </MapView>
   );
