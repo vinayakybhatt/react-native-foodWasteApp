@@ -10,12 +10,8 @@ import {
     Button
 } from "react-native";
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { FontAwesome } from "@expo/vector-icons";
-import Colors from "../../constants/colors";
 import styles from "./styles";
 import Input from "../../components/UI/Input";
-import Card from "../../components/UI/Card";
-import Ticket from "../../components/UI/Ticket";
 import { ALLREQUESTS } from "../../env";
 import { fetchDetails } from "../../store/actions/details";
 import { useSelector, useDispatch } from "react-redux";
@@ -36,7 +32,7 @@ const formReducer = (state, { key, payload }) => {
     }
 };
 
-const CreateBooking = (props) => {
+const CreateBooking = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const [date, setDate] = useState(new Date());
@@ -66,24 +62,11 @@ const CreateBooking = (props) => {
         showMode('date');
     };
 
-    // const data = {
-//   id: v4(),
-//   foodName: "apple",
-//   typeOfFood: "lunch",
-//   quantity: '7',
-//   expiry: new Date().toDateString(),
-//   userId: '',
-//   pickupLocation: "83, kanak vihar",
-// };
     const inputHandler = ({ key, payload }) => {
         formDispatch({
             key,
             payload,
         });
-    };
-
-    const fetchHandler = async () => {
-
     };
 
     const bookingHandler = async () => {

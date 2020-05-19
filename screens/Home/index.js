@@ -4,17 +4,12 @@ import {
   Text,
   TouchableOpacity,
   SafeAreaView,
-  FlatList,
   ScrollView,
-  Button,
   ActivityIndicator,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { FontAwesome } from "@expo/vector-icons";
 import { fetchDetails } from "../../store/actions/details";
 import styles from "./styles";
-import Card from "../../components/UI/Card";
-import Btn from "../../components/UI/Btn";
 import Input from "../../components/UI/Input";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import Ticket from "../../components/UI/Ticket";
@@ -32,7 +27,7 @@ const Home = (props) => {
     };
     loadDetails();
   }, [dispatch]);
-  const { email, localId } = useSelector((state) => state.auth.user);
+  const {localId } = useSelector((state) => state.auth.user);
 
   const details = useSelector((state) => state.details.allDetails);
   const renderInfo = (item, name,from) => {
