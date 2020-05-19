@@ -3,10 +3,7 @@ import {
   Image,
   View,
   Text,
-  TextInput,
   TouchableOpacity,
-  TouchableWithoutFeedback,
-  Keyboard,
   Alert,
   SafeAreaView,
   ScrollView,
@@ -14,13 +11,10 @@ import {
 import { useDispatch } from "react-redux";
 import { auth } from "../../store/actions/auth";
 import { LOGIN, REGISTER } from "../../store/actions/auth";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./styles";
 import Card from "../../components/UI/Card";
 import Input from "../../components/UI/Input";
 import Btn from "../../components/UI/Btn";
-import { Colors } from "react-native/Libraries/NewAppScreen";
-import { TouchableNativeFeedback } from "react-native-gesture-handler";
 
 const formReducer = (state, { type, key, payload }) => {
   switch (type) {
@@ -32,7 +26,7 @@ const formReducer = (state, { type, key, payload }) => {
   }
 };
 
-const LoginScreen = (props) => {
+const LoginScreen = () => {
   const dispatch = useDispatch();
   const [formState, formDispatch] = useReducer(formReducer, {
     username: "",

@@ -4,14 +4,9 @@ import {
   TouchableOpacity,
   Text,
   StyleSheet,
-  Button,
   Image,
-  Alert,
-  ActivityIndicator,
   Dimensions,
   SafeAreaView,
-  ScrollView,
-  TouchableHighlight,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -20,7 +15,6 @@ import LocationPicker from "../../components/UI/LocationPicker";
 import Colors from "../../constants/colors";
 
 const Profile = (props) => {
-  const getParams = props.route.params
   const dispatch = useDispatch();
   const { email, localId } = useSelector((state) => state.auth.user);
   return (
