@@ -1,5 +1,6 @@
 # react-native-foodWasteApp
 The app will allow donors to post food details such as food name, location, expiry time and pick up time.<br/>
+foodWasteApp designed on react-native as frontend and firebase as backend. This is an app which will serve as Food waste Portal It fetches data from firebase database and displays it and posts the data back to it.
 Step1: Clone this Repo locally <br/>
 Step2: Run npm i <br/>
 Step3: Create a firebase project and databse which can be integrated as the backend<br/>
